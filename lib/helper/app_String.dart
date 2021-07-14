@@ -26,3 +26,8 @@ class AppRouteString {
   static const String detailPage = '/detailPage';
   static const String mapPage = '/MapPage';
 }
+
+class AppDatabaseString{
+  AppDatabaseString._();
+  static const UserNode_c = 'UserNode';
+}

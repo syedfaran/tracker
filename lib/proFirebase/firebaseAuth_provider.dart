@@ -12,28 +12,26 @@ class AuthProvider with ChangeNotifier {
   Either<Failure, UserCredential>? _credential;
 
   Either<Failure, UserCredential> get getUserCredential => _credential!;
-  Failure? _failure;
 
+  Failure? _failure;
   Failure get failure => _failure!;
 
-  Future<void> createUser(String email, String password) async {
-    print(email);
-    print(password);
+  Future<void> createUser(String email, String password, String name) async {
     _setState(NotifierState.loading);
-    await Task(() => EmailUser(email: email, password: password).register())
+    await Task(() => EmailUser(email: email, password: password, name:name).register())
         .attempt()
         .map(
-      // Grab only the *left* side of Either<Object, Post>
+          // Grab only the *left* side of Either<Object, Post>
           (either) => either.leftMap((obj) {
-        try {
-          // Cast the Object into a Failure
-          return obj as Failure;
-        } catch (e) {
-          // 'rethrow' the original exception
-          throw obj;
-        }
-      }),
-    )
+            try {
+              // Cast the Object into a Failure
+              return obj as Failure;
+            } catch (e) {
+              // 'rethrow' the original exception
+              throw obj;
+            }
+          }),
+        )
         .run()
         .then((value) => _setUser(value));
     _setState(NotifierState.loaded);
@@ -41,22 +39,37 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> signInUser(String email, String password) async {
     _setState(NotifierState.loading);
-    await EmailUser(email: email, password: password)
-        .signIn()
-        .then((value) => null);
+    await Task(() => EmailUser(email: email, password: password).signIn())
+        .attempt()
+        .map(
+          (either) => either.leftMap((obj) {
+            try {
+              // Cast the Object into a Failure
+              return obj as Failure;
+            } catch (e) {
+              // 'rethrow' the original exception
+              throw obj;
+            }
+          }),
+        )
+        .run()
+        .then((value) => _setUser(value));
     _setState(NotifierState.loaded);
   }
 
+  Future<void> signOutUser()async{
+    await EmailUser().signOut();
+  }
   //*************setState*****************************
   void _setState(NotifierState state) {
     _state = state;
     notifyListeners();
   }
 
-  void _setFailure(Failure failure) {
-    _failure = failure;
-    notifyListeners();
-  }
+  // void _setFailure(Failure failure) {
+  //   _failure = failure;
+  //   notifyListeners();
+  // }
 
   void _setUser(Either<Failure, UserCredential> credential) {
     _credential = credential;
@@ -64,4 +77,3 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 }
-

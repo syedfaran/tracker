@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/businessLogic/form_validation_Provider.dart';
+import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
 import 'package:flutter_app/helper/app_String.dart';
-import 'package:flutter_app/pro/form_validation_Provider.dart';
-import 'package:flutter_app/pro/loginORregisterbloc.dart';
+import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
 import 'package:provider/provider.dart';
 
 class LoginState extends StatelessWidget {
@@ -11,6 +12,7 @@ class LoginState extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final pro = Provider.of<FormProvider>(context);
+    final proT = Provider.of<AuthProvider>(context);
     return Container(
       width: size.width,
       height: size.height,
@@ -33,7 +35,7 @@ class LoginState extends StatelessWidget {
                 height: 20,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColorLight,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -44,11 +46,11 @@ class LoginState extends StatelessWidget {
                       border: InputBorder.none, hintText: AppString.email),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColorLight,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -59,13 +61,9 @@ class LoginState extends StatelessWidget {
                       border: InputBorder.none, hintText: AppString.password),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              // Text(
-              //   "Forgot Password?",
-              //   style: Theme.of(context).textTheme.bodyText1,
-              // )
             ],
           ),
           Column(
@@ -79,10 +77,11 @@ class LoginState extends StatelessWidget {
                     TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                 onPressed: () => {
                   //firebase login
-                  Navigator.pushNamed(
-                    context,
-                    '/homepage',
-                  ),
+                  // Navigator.pushNamed(
+                  //   context,
+                  //   '/homepage',
+                  // ),
+                  context.read<AuthProvider>().signInUser(pro.getEmail.value!, pro.getPassword.value!),
                 },
                 child: Center(
                     child: Text(
@@ -90,6 +89,12 @@ class LoginState extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyText1,
                     )),
               ),
+              if (proT.state == NotifierState.loading)
+                CircularProgressIndicator(),
+              if (proT.state == NotifierState.loaded)
+                proT.getUserCredential.fold(
+                        (failure) => Text(failure.message),
+                        (success) => Text('User Signed in Successfully')),
               SizedBox(
                 height: 30,
               ),

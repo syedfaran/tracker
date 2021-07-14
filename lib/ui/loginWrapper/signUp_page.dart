@@ -1,11 +1,10 @@
-import 'package:toast/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/businessLogic/form_validation_Provider.dart';
+import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
 import 'package:flutter_app/helper/app_String.dart';
-import 'package:flutter_app/pro/form_validation_Provider.dart';
-import 'package:flutter_app/pro/loginORregisterbloc.dart';
+
 import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:dartz/dartz.dart';
 
 class RegisterState extends StatelessWidget {
   const RegisterState({Key? key}) : super(key: key);
@@ -116,7 +115,7 @@ class RegisterState extends StatelessWidget {
                     textStyle:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                 onPressed: ()async {
-                  context.read<AuthProvider>().createUser(pro.getEmail.value!, pro.getPassword.value!);
+                  context.read<AuthProvider>().createUser(pro.getEmail.value!, pro.getPassword.value!,pro.getName.value!);
                 },
                 child: Center(
                     child: Text(

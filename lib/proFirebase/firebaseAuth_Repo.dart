@@ -1,4 +1,4 @@
-import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_app/proFirebase/databaseService.dart';
 
 import '';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,22 +19,14 @@ abstract class UserRepository<T> {
 class EmailUser implements UserRepository<UserCredential> {
   final String? email;
   final String? password;
-
-  EmailUser({this.email, this.password});
+  final String? name;
+  EmailUser({this.email, this.password,this.name});
 
   @override
   Future<UserCredential> register() async {
     try{
       final userCredential =await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email!, password: password!);
-      var _firebaseRef = FirebaseDatabase().reference().child('UserNode');
-      print(userCredential.user!.uid);
-      _firebaseRef.child(userCredential.user!.uid).set({
-        {
-          "name": "faran",
-          "id": userCredential.user!.uid.toString(),
-          "email": userCredential.user!.email.toString(),
-        }
-      }).then((value) => print('dataUpDated SuccessFully'));
+      await DatabaseService(email: email,name: name,uid: userCredential.user!.uid.toString()).updateUserData();
       return userCredential;
     }on FirebaseAuthException catch(e) {
       if(e.code == 'weak-password'){
@@ -49,6 +41,8 @@ class EmailUser implements UserRepository<UserCredential> {
 
   @override
   Future<UserCredential> signIn() async {
+    print('faran $email');
+    print('faran $password');
     try{
       final userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email!, password: password!);

@@ -1,12 +1,12 @@
 // @dart=2.9
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/businessLogic/form_validation_Provider.dart';
+import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
 import 'package:flutter_app/myApp.dart';
-import 'package:flutter_app/pro/form_validation_Provider.dart';
-import 'package:flutter_app/pro/loginORregisterbloc.dart';
+
 import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
 import 'package:provider/provider.dart';
 
