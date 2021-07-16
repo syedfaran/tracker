@@ -17,7 +17,7 @@ class AuthProvider with ChangeNotifier {
   Failure get failure => _failure!;
 
   Future<void> createUser(String email, String password, String name) async {
-    _setState(NotifierState.loading);
+    setState(NotifierState.loading);
     await Task(() => EmailUser(email: email, password: password, name:name).register())
         .attempt()
         .map(
@@ -34,11 +34,11 @@ class AuthProvider with ChangeNotifier {
         )
         .run()
         .then((value) => _setUser(value));
-    _setState(NotifierState.loaded);
+    setState(NotifierState.loaded);
   }
 
   Future<void> signInUser(String email, String password) async {
-    _setState(NotifierState.loading);
+    setState(NotifierState.loading);
     await Task(() => EmailUser(email: email, password: password).signIn())
         .attempt()
         .map(
@@ -54,23 +54,17 @@ class AuthProvider with ChangeNotifier {
         )
         .run()
         .then((value) => _setUser(value));
-    _setState(NotifierState.loaded);
+    setState(NotifierState.loaded);
   }
 
   Future<void> signOutUser()async{
     await EmailUser().signOut();
   }
   //*************setState*****************************
-  void _setState(NotifierState state) {
+  void setState(NotifierState state) {
     _state = state;
     notifyListeners();
   }
-
-  // void _setFailure(Failure failure) {
-  //   _failure = failure;
-  //   notifyListeners();
-  // }
-
   void _setUser(Either<Failure, UserCredential> credential) {
     _credential = credential;
 

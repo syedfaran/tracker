@@ -1,7 +1,7 @@
 import 'package:flutter_app/proFirebase/databaseService.dart';
-
-import '';
 import 'package:firebase_auth/firebase_auth.dart';
+
+
 class Failure{
   final String message;
   Failure(this.message);
@@ -25,7 +25,7 @@ class EmailUser implements UserRepository<UserCredential> {
   @override
   Future<UserCredential> register() async {
     try{
-      final userCredential =await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email!, password: password!);
+      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email!, password: password!);
       await DatabaseService(email: email,name: name,uid: userCredential.user!.uid.toString()).updateUserData();
       return userCredential;
     }on FirebaseAuthException catch(e) {
@@ -41,8 +41,6 @@ class EmailUser implements UserRepository<UserCredential> {
 
   @override
   Future<UserCredential> signIn() async {
-    print('faran $email');
-    print('faran $password');
     try{
       final userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email!, password: password!);

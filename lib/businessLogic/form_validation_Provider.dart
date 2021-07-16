@@ -29,17 +29,17 @@ class FormProvider with ChangeNotifier {
   }
 
   void setPassword(String password){
-    if(password.length>6){
-      _password = Validator(password, null);
+    if(password.length>=4){
+      _password = Validator(password.trim(), null);
     }else{
-      _password = Validator(null,'Password must be at least 6 character');
+      _password = Validator(null,'Password must be at least 4 character');
     }
     notifyListeners();
   }
 
   void setName(String name){
-    if(name.length>3){
-      _name = Validator(name, null);
+    if(name.length>=3){
+      _name = Validator(name.trim(), null);
     }else{
       _name = Validator(null,'Password must be at least 3 character');
     }

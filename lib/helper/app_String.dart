@@ -8,7 +8,6 @@ class AppString {
 
   static const String signIn = 'Sign In';
   static const String signup = 'Create account';
-
   static const String email = 'Email Address ';
   static const String password = 'Password';
   static const String name = 'Name';
@@ -16,6 +15,8 @@ class AppString {
   static const String task = 'Tasks';
   static const String list = 'List';
   static const String start = 'START';
+  static const String registerSuccessfully = 'User Register Successfully';
+  static const String signedInSuccessfully = 'User Signed in Successfully';
 }
 
 class AppRouteString {
@@ -30,4 +31,9 @@ class AppRouteString {
 class AppDatabaseString{
   AppDatabaseString._();
   static const UserNode_c = 'UserNode';
+}
+
+class AppApiString{
+  AppApiString._();
+  static const listOfJobs = 'https://60f016eaf587af00179d3d41.mockapi.io/jobs';
 }

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_app/model/user_model.dart';
+import 'package:flutter_app/data/model/user_model.dart';
+
 
 abstract class DatabaseRepo<T> {
   Future<T> updateUserData();
@@ -14,7 +15,7 @@ class DatabaseService with DatabaseRepo<void> {
 
   // collection reference
   final  userCollection = FirebaseFirestore.instance.collection('UserNode');
-
+  //when user SignUp for the first Time i.e setter
   Future<void> updateUserData() async {
     await userCollection.doc(uid).set({
       'userId': uid,
@@ -23,13 +24,10 @@ class DatabaseService with DatabaseRepo<void> {
     });
   }
 
-  //setter
+  //mapping json to userData Obj.
   UserData _userDataFromSnapshot(DocumentSnapshot<Map<String,dynamic>> snapshot) {
-    return UserData(
-        uid: snapshot.data()!['userId'],
-        name: snapshot.data()!['name'],
-        email: snapshot.data()!['email'],
-        );
+    return UserData.fromJson(snapshot.data()!);
+
   }
   //getter
   Stream<UserData> get userData {

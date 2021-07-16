@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
 
 import 'package:flutter_app/ui/loginWrapper/signIn_page.dart';
 import 'package:provider/provider.dart';

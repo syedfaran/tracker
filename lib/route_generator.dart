@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/demoClass.dart';
-import 'package:flutter_app/ui/detail_page.dart';
+
+import 'package:flutter_app/ui/detail_page/detail_page.dart';
 import 'package:flutter_app/ui/g_map/map_page.dart';
 import 'package:flutter_app/ui/homePage.dart';
 import 'package:flutter_app/ui/wrapper.dart';
@@ -30,7 +30,7 @@ class RouteGenerator {
                 RouteAwareWidget('/homepage', child: HomePage()));
       case '/detailPage':
         return MaterialPageRoute(
-            builder: (context) => DetailPage(demo: arguments.data));
+            builder: (context) => DetailPage(mainJob: arguments.data));
       case '/MapPage':
         return MaterialPageRoute(builder: (context) => MapPage());
     }
