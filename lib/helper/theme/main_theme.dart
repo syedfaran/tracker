@@ -26,4 +26,10 @@ ThemeData themeOne = ThemeData(
     iconTheme: IconThemeData(
         color: AppColor.bluePrimaryColor,
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          backgroundColor: MaterialStateProperty.all<Color>(AppColor.bluePrimaryColor,),
+        )
+    )
 );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/customWidget/customRText.dart';
 import 'package:flutter_app/data/model/job_list_model.dart';
 
 class LowerContent extends StatelessWidget {
@@ -13,108 +14,17 @@ class LowerContent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 25,),
-          RichText(
-            text: TextSpan(
-              text: "Task : ",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(fontSize: 20, color: Color(0xff9C9C9D)),
-              children: [
-                TextSpan(
-                    text: job!.task,
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                      fontSize: 20.0,
-                    )),
-              ],
-            ),
-          ),
-          SizedBox(height: 10,),
-          RichText(
-            text: TextSpan(
-              text: "Detail : ",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(fontSize: 20, color: Color(0xff9C9C9D)),
-              children: [
-                TextSpan(
-                    text: job!.detail,
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                      fontSize: 20.0,
-                    )),
-              ],
-            ),
-          ),
-          SizedBox(height: 10,),
-          RichText(
-            text: TextSpan(
-              text: "Location : ",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(fontSize: 20, color: Color(0xff9C9C9D)),
-              children: [
-                TextSpan(
-                    text: job!.location,
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                      fontSize: 20.0,
-                    )),
-              ],
-            ),
-          ),
-          SizedBox(height: 10,),
-          RichText(
-            text: TextSpan(
-              text: "Date : ",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(fontSize: 20, color: Color(0xff9C9C9D)),
-              children: [
-                TextSpan(
-                    text: job!.date,
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                      fontSize: 20.0,
-                    )),
-              ],
-            ),
-          ),
-          SizedBox(height: 10,),
-          RichText(
-            text: TextSpan(
-              text: "Time : ",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(fontSize: 20, color: Color(0xff9C9C9D)),
-              children: [
-                TextSpan(
-                    text: job!.time,
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                      fontSize: 20.0,
-                    )),
-              ],
-            ),
-          ),
-          SizedBox(height: 10,),
-          RichText(
-            text: TextSpan(
-              text: "Task : ",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .copyWith(fontSize: 20, color: Color(0xff9C9C9D)),
-              children: [
-                TextSpan(
-                    text: job!.task,
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                      fontSize: 20.0,
-                    )),
-              ],
-            ),
-          ),
+          const SizedBox(height: 25),
+          JobDescriptionTextWidget(fieldName:'Task',fieldValue: job!.task,),
+          const SizedBox(height: 10),
+          JobDescriptionTextWidget(fieldName:'Detail',fieldValue: job!.detail,),
+          const SizedBox(height: 10),
+          JobDescriptionTextWidget(fieldName:'Location',fieldValue: job!.location,),
+          const SizedBox(height: 10),
+          JobDescriptionTextWidget(fieldName:'Date',fieldValue: job!.date,),
+          const SizedBox(height: 10),
+          JobDescriptionTextWidget(fieldName:'Time',fieldValue: job!.time,),
+          const SizedBox(height: 10),
         ],
       ),
     );

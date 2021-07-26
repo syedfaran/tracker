@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/DataProvider/joblistProvider.dart';
+import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
 import 'package:flutter_app/data/model/job_list_model.dart';
 import 'package:flutter_app/data/model/user_model.dart';
 import 'package:flutter_app/helper/app_String.dart';
@@ -14,11 +15,10 @@ import 'package:flutter_app/ui/g_map/map_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return StreamProvider<UserData>.value(
-      initialData: UserData(uid: 'lol', name: 'lol', email: 'lol'),
+      initialData: UserData(uid: 'loading', name: 'loading', email: 'loading'),
       value: DatabaseService(uid: context.read<User>().uid).userData,
       child: Scaffold(
         appBar: AppBar(
@@ -28,9 +28,12 @@ class HomePage extends StatelessWidget {
               Icons.arrow_back_ios,
               color: Theme.of(context).iconTheme.color,
             ),
-            onPressed: () {
+            onPressed: ()async {
+              context.read<AuthProvider>().signOutUser().then((value) {
+                context.read<LoginRegisterProvider>().eventToState(LoginEvent.login);
+              });
               //this will do  exit app as we are not using navigation
-              SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+             // SystemChannels.platform.invokeMethod('SystemNavigator.pop');
             },
           ),
           backgroundColor: Colors.transparent,
@@ -96,6 +99,7 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
 
 class UserName extends StatelessWidget {
   const UserName({

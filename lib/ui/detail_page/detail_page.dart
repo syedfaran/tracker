@@ -35,14 +35,19 @@ class DetailPage extends StatelessWidget {
         elevation: 0.0,
       ),
       body: Container(
-          height: AppConfig.of(context).appHeight(100),
-          width: AppConfig.of(context).appWidth(100),
-          child: Center(
-            child: _SlimyWidget(
-              list: mainJob!.jobs,
-              mainJob: mainJob,
-            ),
-          )),
+        height: AppConfig.of(context).appHeight(100),
+        width: AppConfig.of(context).appWidth(100),
+        // child: Center(
+        //   child: _SlimyWidget(
+        //     list: mainJob!.jobs,
+        //     mainJob: mainJob,
+        //   ),
+        // )),
+        child: _SlimyWidget(
+          list: mainJob!.jobs,
+          mainJob: mainJob,
+        ),
+      ),
     );
   }
 }
@@ -60,14 +65,12 @@ class _SlimyWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: SlimyCard(
-            color: Theme
-                .of(context)
-                .primaryColorLight,
+            color: Theme.of(context).primaryColorLight,
             width: AppConfig.of(context).appWidth(85),
             topCardHeight: AppConfig.of(context).appWidth(46),
             bottomCardHeight: 300,
             borderRadius: 15,
-            topCardWidget: UpperContent(job: job,cate: mainJob),
+            topCardWidget: UpperContent(job: job, cate: mainJob),
             bottomCardWidget: LowerContent(job: job),
             slimeEnabled: true,
           ),

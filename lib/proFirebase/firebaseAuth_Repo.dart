@@ -55,11 +55,12 @@ class EmailUser implements UserRepository<UserCredential> {
       }
     }
   }
-
   @override
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
+
+
 }
 
 

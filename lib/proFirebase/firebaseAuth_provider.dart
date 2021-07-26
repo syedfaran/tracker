@@ -59,6 +59,7 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> signOutUser()async{
     await EmailUser().signOut();
+    setState(NotifierState.initial);
   }
   //*************setState*****************************
   void setState(NotifierState state) {

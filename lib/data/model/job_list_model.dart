@@ -30,7 +30,8 @@ class Jobs {
   String? time;
   String? date;
   String? location;
-
+  String? lat;
+  String? long;
   Jobs({this.task, this.detail, this.time, this.date, this.location});
 
   Jobs.fromJson(Map<String, dynamic> json) {
@@ -39,6 +40,9 @@ class Jobs {
     time = json['time'];
     date = json['date'];
     location = json['location'];
+    lat = json['lat'];
+    long = json['long'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +52,8 @@ class Jobs {
     data['time'] = this.time;
     data['date'] = this.date;
     data['location'] = this.location;
+    data['lat'] = this.lat;
+    data['long'] = this.long;
     return data;
   }
 }

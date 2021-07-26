@@ -5,7 +5,7 @@ class TextFieldContainer extends StatelessWidget {
   final void Function(String)? callback;
   final String? errorText;
   final bool? obscureText;
-
+  //final TextEditingController? controller,
   const TextFieldContainer(
       {Key? key,
       this.hintText,
@@ -22,6 +22,7 @@ class TextFieldContainer extends StatelessWidget {
           color: Theme.of(context).primaryColorLight,
           borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: TextField(
+        //controller: controller,
         onChanged: callback,
         obscureText: obscureText==null?false:true,
         decoration: InputDecoration(

@@ -9,6 +9,7 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final pro = Provider.of<User>(context);
     //listen for auth Changes display LoginPage or HomePage
     return pro==null?LoginPage():HomePage();
