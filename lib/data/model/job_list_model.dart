@@ -25,6 +25,7 @@ class JobListModel {
 }
 
 class Jobs {
+  int? jobNo;
   String? task;
   String? detail;
   String? time;
@@ -32,9 +33,10 @@ class Jobs {
   String? location;
   String? lat;
   String? long;
-  Jobs({this.task, this.detail, this.time, this.date, this.location});
+  Jobs({this.task, this.detail, this.time, this.date, this.location,this.jobNo});
 
   Jobs.fromJson(Map<String, dynamic> json) {
+    jobNo = json['jobNumber'];
     task = json['task'];
     detail = json['detail'];
     time = json['time'];
@@ -47,6 +49,7 @@ class Jobs {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['jobNumber'] = this.jobNo;
     data['task'] = this.task;
     data['detail'] = this.detail;
     data['time'] = this.time;

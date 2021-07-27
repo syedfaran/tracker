@@ -61,8 +61,8 @@ class HomePage extends StatelessWidget {
                   primary: Color(0xff055E9E),
                   textStyle: Theme.of(context).textTheme.bodyText1),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MapPage()));
+
+                Navigator.pushNamed(context, '/MapPage');
               },
               child: Text(
                 AppString.start,

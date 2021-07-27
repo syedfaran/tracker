@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/helper/screenUtil.dart';
 
 class MapMarker extends StatefulWidget {
   final String? jobNo;
@@ -13,7 +14,7 @@ class _MapMarkerState extends State<MapMarker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 90.0,
+      width: AppConfig.of(context).appWidth(15.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,10 +35,7 @@ class _MapMarkerState extends State<MapMarker> {
                 child: Text(
                   widget.jobNo,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color:Theme.of(context).primaryColor),
                 ),
               ),
             ),
@@ -45,9 +43,9 @@ class _MapMarkerState extends State<MapMarker> {
           Container(
               height: 10.0,
               decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: Theme.of(context).primaryColor,
                   border: Border.all(
-                    color: Colors.green,
+                    color: Theme.of(context).primaryColor,
                   ),
                   borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(14),
@@ -56,7 +54,7 @@ class _MapMarkerState extends State<MapMarker> {
             clipper: CustomClipPath(),
             child: Container(
               height: 36.0,
-              color: Colors.green,
+              color: Theme.of(context).primaryColor,
             ),
           )
         ],

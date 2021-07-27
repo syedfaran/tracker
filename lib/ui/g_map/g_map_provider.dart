@@ -12,29 +12,142 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 import 'map_marker.dart';
+import 'dart:collection';
+// class MapProvider with ChangeNotifier {
+//   NotifierState _mapNotifier = NotifierState.initial;
+//   NotifierState get mapNotifier => _mapNotifier;
+//   Completer<GoogleMapController> _controller = Completer();
+//   late GoogleMapController _mapController;
+//   late Position _position;
+//   Position get getPosition => _position;
+//   void _setPosition(Position position) {
+//     _position = position;
+//     notifyListeners();
+//   }
+//   void setMapNotifier(NotifierState notifier) {
+//     _mapNotifier = notifier;
+//     notifyListeners();
+//   }
+//
+//
+//   //methods
+//   //accessPermission and get Current Location
+//   Future<void> determinePosition(BuildContext context) async {
+//     setMapNotifier(NotifierState.loading);
+//     bool serviceEnabled;
+//     LocationPermission permission;
+//     // Test if location services are enabled.
+//     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+//     if (!serviceEnabled) {
+//       // Location services logiuare not enabled don't continue
+//       // accessing the position and request users of the
+//       // App to enable the location services.
+//       WidgetsBinding.instance!.addPostFrameCallback((_) {
+//         Navigator.pop(context);
+//         // Add Your Code here.
+//       });
+//       ToastNotifier.showToast(context, 'Location services are disabled');
+//       return Future.error('Location services are disabled.');
+//     }
+//
+//     permission = await Geolocator.checkPermission();
+//     if (permission == LocationPermission.denied) {
+//       permission = await Geolocator.requestPermission();
+//       if (permission == LocationPermission.denied) {
+//         // Permissions are denied, next time you could try
+//         // requesting permissions again (this is also where
+//         // Android's shouldShowRequestPermissionRationale
+//         // returned true. According to Android guidelines
+//         // your App should show an explanatory UI now.
+//         ToastNotifier.showToast(context, 'Location permissions are denied');
+//         Navigator.pop(context);
+//         return Future.error('Location permissions are denied');
+//       }
+//     }
+//
+//     if (permission == LocationPermission.deniedForever) {
+//       // Permissions are denied forever, handle appropriately.
+//       ToastNotifier.showToast(context,
+//           'Location permissions are permanently denied, we cannot request permissions.');
+//       Navigator.pop(context);
+//       return Future.error(
+//           'Location permissions are permanently denied, we cannot request permissions.');
+//     }
+//
+//     // When we reach here, permissions are granted and we can
+//     // continue accessing the position of the device.
+//     await Geolocator.getCurrentPosition().then((value) {
+//       _setPosition(value);
+//       // upDateCameraNewPosition(value);
+//     });
+//     setMapNotifier(NotifierState.loaded);
+//   }
+//
+//   Set<Marker> getMakers([BuildContext? context]) {
+//     List<Jobs> list = [];
+//     context!.read<JobListProvider>().jobList.map((category) {
+//       category.map((single) {
+//         single.jobs!.map((data) {
+//           list.add(data);
+//         }).toList();
+//       }).toList();
+//     });
+//     return list
+//         .map((pos) => Marker(
+//       markerId: MarkerId(pos.task.toString()),
+//       position: LatLng(double.parse(pos.lat!), double.parse(pos.long!)),
+//     ))
+//         .toSet();
+//   }
+//
+//   //mapController
+//   void mapController(GoogleMapController controller) {
+//     _mapController = controller;
+//     _controller.complete(controller);
+//     notifyListeners();
+//   }
+//
+//   //initial camera Position on Startup
+//   CameraPosition initialCameraPosition() {
+//     return CameraPosition(
+//         target: LatLng(_position.latitude, _position.longitude),
+//         zoom: 14,
+//         bearing: 15);
+//   }
+//
+//   void upDateCameraNewPosition(Position position) {
+//     print('bilal');
+//     _mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+//         target: LatLng(position.latitude, position.longitude),
+//         zoom: 14,
+//         tilt: 30,
+//         bearing: 15)));
+//   }
+//   //onCameraMove
+//   void onCameraMove(CameraPosition cameraPosition){
+//
+//   }
+// }
 
 class MapProvider with ChangeNotifier {
   final List<Jobs> jobList = [];
   NotifierState _mapNotifier = NotifierState.initial;
-
   NotifierState get mapNotifier => _mapNotifier;
-
   void setMapNotifier(NotifierState notifier) {
     _mapNotifier = notifier;
     notifyListeners();
   }
-
   Completer<GoogleMapController> _controller = Completer();
   late GoogleMapController _mapController;
   late Position _position;
-
   void _setPosition(Position position) {
     _position = position;
     notifyListeners();
   }
-
   Position get getPosition => _position;
-
+  Set<Marker> _getMarkers = {};
+  Set<Marker> get getMarkers=>_getMarkers;
+  //methods
   //accessPermission and get Current Location
   Future<void> determinePosition(BuildContext context) async {
     setMapNotifier(NotifierState.loading);
@@ -82,41 +195,54 @@ class MapProvider with ChangeNotifier {
     // continue accessing the position of the device.
     await Geolocator.getCurrentPosition().then((value) {
       _setPosition(value);
-      // upDateCameraNewPosition(value);
     });
+    await setMakers(context);
     setMapNotifier(NotifierState.loaded);
   }
 
-  Set<Marker> getMakers(BuildContext context) {
+ //markers
+  List<MapMarker> _mapMarkers = [];
+  List<Marker> _customMarkers = [];
+   setMakers(BuildContext context) async {
     context.read<JobListProvider>().jobList.map((category) {
       category.map((single) {
         single.jobs!.map((data) {
+         // print("${data.jobNo}and ${data.task}");
           jobList.add(data);
         }).toList();
       }).toList();
     });
-    MarkerGenerator(markerWidgets(), (bitmaps) {
-      mapBitmapsToMarkers(bitmaps);
-    }).generate(context);
-    notifyListeners();
-    return customMarkers.toSet();
-  }
 
-  List<Widget> markerWidgets() {
+    jobList.sort((a, b) => a.jobNo!.compareTo(b.jobNo!));
+
+    MarkerGenerator(_markerWidgets(), (bitmaps) {
+      return mapBitmapsToMarkers(bitmaps, (markerList) {
+        _getMarkers = markerList;
+        notifyListeners();
+      });
+    }).generate(context);
+  }
+  List<Widget> _markerWidgets() {
     List<Widget> list = [];
     jobList.forEach((element) {
-      list.add(MapMarker(element.task));
+      list.add(MapMarker(element.jobNo.toString()));
     });
     return list;
-    // return jobList.asMap().map((index, element) {
-    //       print(index);
-    //       return MapEntry(index, MapMarker(element.task));
-    // })
-    //     .values
-    //     .toList();
+  }
+  void mapBitmapsToMarkers(List<Uint8List> bitmaps, Function(Set<Marker>) callback) {
+    bitmaps.asMap().forEach((i, bmp) {
+      _customMarkers.add(Marker(
+        markerId: MarkerId("$i"),
+        position: LatLng(
+            double.parse(jobList[i].lat!), double.parse(jobList[i].long!)),
+        icon: BitmapDescriptor.fromBytes(bmp),
+      ));
+    });
+    // notifyListeners();
+    callback(_customMarkers.toSet());
   }
 
-  ///////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////
 
   List<List<PointLatLng>> points = [];
   List<LatLng> polylineCoordinates = [];
@@ -150,14 +276,13 @@ class MapProvider with ChangeNotifier {
     setPolyLine();
     return {};
   }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
   //mapController
   void mapController(GoogleMapController controller) {
     _mapController = controller;
     _controller.complete(controller);
     notifyListeners();
   }
-
   //initial camera Position on Startup
   CameraPosition initialCameraPosition() {
     return CameraPosition(
@@ -165,31 +290,22 @@ class MapProvider with ChangeNotifier {
         zoom: 14,
         bearing: 15);
   }
-
-  void upDateCameraNewPosition(Position position) {
+  //move to current Postion
+  void upDateCameraNewPosition(double lat,double lng) {
     _mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: LatLng(position.latitude, position.longitude),
-        zoom: 14,
+        target: LatLng(lat, lng),
+        zoom: 18,
         tilt: 30,
-        bearing: 15)));
+        bearing: 50)));
   }
 
   //onCameraMove
   void onCameraMove(CameraPosition cameraPosition) {}
 
 //////////////////////////////////////////////////////////////////////////////////////////
-  List<MapMarker> mapMarkers = [];
-  List<Marker> customMarkers = [];
 
-  void mapBitmapsToMarkers(List<Uint8List> bitmaps) {
-    bitmaps.asMap().forEach((i, bmp) {
-      customMarkers.add(Marker(
-        markerId: MarkerId("$i"),
-        position: LatLng(
-            double.parse(jobList[i].lat!), double.parse(jobList[i].long!)),
-        icon: BitmapDescriptor.fromBytes(bmp),
-      ));
-    });
-   // notifyListeners();
-  }
+
+
 }
+
+class MarkerConfig{}
