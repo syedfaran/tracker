@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/data/model/demoClass.dart';
+
 import 'package:flutter_app/data/model/job_list_model.dart';
 import 'package:flutter_app/helper/screenUtil.dart';
 import 'package:flutter_app/ui/detail_page/lowerSection.dart';

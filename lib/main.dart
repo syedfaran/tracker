@@ -7,7 +7,7 @@ import 'package:flutter_app/DataProvider/joblistProvider.dart';
 import 'package:flutter_app/businessLogic/SignUp_validation_Provider.dart';
 import 'package:flutter_app/myApp.dart';
 import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
-import 'package:flutter_app/ui/g_map/map_page.dart';
+
 import 'package:provider/provider.dart';
 
 

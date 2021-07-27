@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/businessLogic/SignUp_validation_Provider.dart';
 import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
 import 'package:flutter_app/customWidget/textField_container.dart';
 import 'package:flutter_app/helper/app_String.dart';
@@ -15,9 +14,7 @@ class LoginState extends StatelessWidget {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final Size size = MediaQuery.of(context).size;
-    final formPro = Provider.of<FormProvider>(context);
     final authPro = Provider.of<AuthProvider>(context);
-    final GlobalKey<FormFieldState> _key;
     return Container(
       width: size.width,
       height: size.height,
@@ -39,16 +36,16 @@ class LoginState extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
                 TextFieldContainer(
+                  controller: emailController,
                   hintText: AppString.email,
-                  callback: formPro.setEmail,
-                 // controller: emailController,
+                 // callback: formPro.setEmail,
                 ),
                 const SizedBox(height: 20),
                 TextFieldContainer(
+                  controller: passwordController,
                   hintText: AppString.password,
-                  callback: formPro.setPassword,
+                  //callback: formPro.setPassword,
                   obscureText: true,
-                 // controller: passwordController,
                 ),
                 const SizedBox(height: 20),
               ],
@@ -58,7 +55,7 @@ class LoginState extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     context.read<AuthProvider>().signInUser(
-                        formPro.getEmail.value!, formPro.getPassword.value!);
+                        emailController.text, passwordController.text);
                   },
                   child: Text(AppString.signIn),
                 ),

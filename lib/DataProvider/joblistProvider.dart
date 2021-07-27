@@ -20,6 +20,7 @@ class JobListProvider with ChangeNotifier {
   }
 
   void _setJob(Either<Failure, List<JobListModel>> job){
+
     _jobList = job;
     notifyListeners();
   }

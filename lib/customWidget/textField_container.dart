@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TextFieldContainer extends StatelessWidget {
+  final TextEditingController? controller;
   final String? hintText;
   final void Function(String)? callback;
   final String? errorText;
@@ -11,7 +12,7 @@ class TextFieldContainer extends StatelessWidget {
       this.hintText,
       this.callback,
       this.errorText,
-      this.obscureText})
+      this.obscureText, this.controller})
       : super(key: key);
 
   @override
@@ -22,7 +23,7 @@ class TextFieldContainer extends StatelessWidget {
           color: Theme.of(context).primaryColorLight,
           borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: TextField(
-        //controller: controller,
+        controller: controller,
         onChanged: callback,
         obscureText: obscureText==null?false:true,
         decoration: InputDecoration(
@@ -31,3 +32,7 @@ class TextFieldContainer extends StatelessWidget {
     );
   }
 }
+
+
+
+

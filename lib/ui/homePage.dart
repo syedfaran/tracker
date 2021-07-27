@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:flutter_app/DataProvider/joblistProvider.dart';
 import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
 import 'package:flutter_app/data/model/job_list_model.dart';
