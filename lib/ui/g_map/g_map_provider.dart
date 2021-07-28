@@ -10,9 +10,8 @@ import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-
 import 'map_marker.dart';
-import 'dart:collection';
+
 // class MapProvider with ChangeNotifier {
 //   NotifierState _mapNotifier = NotifierState.initial;
 //   NotifierState get mapNotifier => _mapNotifier;

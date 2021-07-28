@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 class MapPage extends StatelessWidget {
   final mapProvider = MapProvider();
+
   @override
   Widget build(BuildContext context) {
     print('ali');
@@ -27,7 +28,8 @@ class MapPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: FloatingActionButton(
                 onPressed: () {
-                  pro.upDateCameraNewPosition(pro.getPosition.latitude,pro.getPosition.longitude);
+                  pro.upDateCameraNewPosition(
+                      pro.getPosition.latitude, pro.getPosition.longitude);
                 },
                 child: Icon(Icons.my_location_sharp),
               ),
@@ -40,7 +42,7 @@ class MapPage extends StatelessWidget {
                 if (pro.mapNotifier == NotifierState.loaded)
                   GoogleMap(
                     //onCameraMove: pro.onCameraMove,
-                   // polylines: pro.getPolyLine(),
+                    // polylines: pro.getPolyLine(),
                     markers: pro.getMarkers,
                     onMapCreated: pro.mapController,
                     mapType: MapType.terrain,
@@ -56,25 +58,53 @@ class MapPage extends StatelessWidget {
                       child: Icon(Icons.location_on),
                     ),
                   ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: AppConfig.of(context).appHeight(8.0),
-                    width: double.infinity,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: pro.jobList.length,
-                      itemBuilder: (context,index){
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                          child: ActionChip(label: Text(pro.jobList[index].task), onPressed: (){
-                            pro.upDateCameraNewPosition(double.parse(pro.jobList[index].lat!),double.parse(pro.jobList[index].long!));
-                          }),
-                        );
-                      },
+                if (pro.mapNotifier == NotifierState.loaded)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      color: Colors.amber,
+                      height: AppConfig.of(context).appHeight(10.0),
+                      width: double.infinity,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: pro.jobList.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              pro.upDateCameraNewPosition(
+                                  double.parse(pro.jobList[index].lat!),
+                                  double.parse(pro.jobList[index].long!));
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(right: 15,left: 15),
+                              margin: EdgeInsets.only(right: 15,left: 15,bottom: 10),
+                              height: 100,
+                              width: 100,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(pro.jobList[index].task, overflow: TextOverflow.ellipsis),
+                                  Text(pro.jobList[index].time,overflow: TextOverflow.ellipsis),
+                                  Text(pro.jobList[index].date,overflow: TextOverflow.ellipsis),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColorLight,
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Color(0xff055E9E)
+                                            .withOpacity(0.3),
+                                        offset: Offset(1.0, 1.0),
+                                        blurRadius: 3),
+                                  ]),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                )
+                  )
               ],
             ),
           );
@@ -83,5 +113,3 @@ class MapPage extends StatelessWidget {
     );
   }
 }
-
-
