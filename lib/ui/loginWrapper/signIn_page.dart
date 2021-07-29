@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
+import 'package:flutter_app/businessLogic/signIn_validation.dart';
 import 'package:flutter_app/customWidget/textField_container.dart';
 import 'package:flutter_app/helper/app_String.dart';
 import 'package:flutter_app/helper/toastNotfier.dart';
@@ -8,13 +9,12 @@ import 'package:provider/provider.dart';
 
 class LoginState extends StatelessWidget {
   const LoginState({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+
     final Size size = MediaQuery.of(context).size;
     final authPro = Provider.of<AuthProvider>(context);
+    final signInProvide = Provider.of<SignInFormProvider>(context);
     return Container(
       width: size.width,
       height: size.height,
@@ -36,15 +36,13 @@ class LoginState extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
                 TextFieldContainer(
-                  controller: emailController,
                   hintText: AppString.email,
-                 // callback: formPro.setEmail,
+                  callback: signInProvide.setEmail,
                 ),
                 const SizedBox(height: 20),
                 TextFieldContainer(
-                  controller: passwordController,
                   hintText: AppString.password,
-                  //callback: formPro.setPassword,
+                  callback: signInProvide.setPassword,
                   obscureText: true,
                 ),
                 const SizedBox(height: 20),
@@ -54,8 +52,9 @@ class LoginState extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
+                    signInProvide.submit();
                     context.read<AuthProvider>().signInUser(
-                        emailController.text, passwordController.text);
+                        signInProvide.getEmail.value!, signInProvide.getPassword.value!);
                   },
                   child: Text(AppString.signIn),
                 ),

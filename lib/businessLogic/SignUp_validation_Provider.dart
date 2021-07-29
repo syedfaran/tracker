@@ -21,7 +21,7 @@ class FormProvider with ChangeNotifier {
   Validator get getConfirmPassword=>_confirmPassword;
   void setEmail(String email){
     if(email.contains('@')){
-      _email = Validator(email, null);
+      _email = Validator(email.trim(), null);
     }else{
       _email = Validator(null, 'Invalid Email Format');
     }

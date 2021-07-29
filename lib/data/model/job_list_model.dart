@@ -26,6 +26,7 @@ class JobListModel {
 
 class Jobs {
   int? jobNo;
+  String? image;
   String? task;
   String? detail;
   String? time;
@@ -44,6 +45,7 @@ class Jobs {
     location = json['location'];
     lat = json['lat'];
     long = json['long'];
+    image = json['image'];
 
   }
 
@@ -55,6 +57,7 @@ class Jobs {
     data['time'] = this.time;
     data['date'] = this.date;
     data['location'] = this.location;
+    data['image'] = this.image;
     data['lat'] = this.lat;
     data['long'] = this.long;
     return data;

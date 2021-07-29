@@ -131,21 +131,28 @@ import 'map_marker.dart';
 class MapProvider with ChangeNotifier {
   final List<Jobs> jobList = [];
   NotifierState _mapNotifier = NotifierState.initial;
+
   NotifierState get mapNotifier => _mapNotifier;
+
   void setMapNotifier(NotifierState notifier) {
     _mapNotifier = notifier;
     notifyListeners();
   }
+
   Completer<GoogleMapController> _controller = Completer();
   late GoogleMapController _mapController;
   late Position _position;
+
   void _setPosition(Position position) {
     _position = position;
     notifyListeners();
   }
+
   Position get getPosition => _position;
   Set<Marker> _getMarkers = {};
-  Set<Marker> get getMarkers=>_getMarkers;
+
+  Set<Marker> get getMarkers => _getMarkers;
+
   //methods
   //accessPermission and get Current Location
   Future<void> determinePosition(BuildContext context) async {
@@ -199,14 +206,15 @@ class MapProvider with ChangeNotifier {
     setMapNotifier(NotifierState.loaded);
   }
 
- //markers
+  //markers
   List<MapMarker> _mapMarkers = [];
   List<Marker> _customMarkers = [];
-   setMakers(BuildContext context) async {
+
+  setMakers(BuildContext context) async {
     context.read<JobListProvider>().jobList.map((category) {
       category.map((single) {
         single.jobs!.map((data) {
-         // print("${data.jobNo}and ${data.task}");
+          // print("${data.jobNo}and ${data.task}");
           jobList.add(data);
         }).toList();
       }).toList();
@@ -220,7 +228,10 @@ class MapProvider with ChangeNotifier {
         notifyListeners();
       });
     }).generate(context);
+
+
   }
+
   List<Widget> _markerWidgets() {
     List<Widget> list = [];
     jobList.forEach((element) {
@@ -228,53 +239,60 @@ class MapProvider with ChangeNotifier {
     });
     return list;
   }
-  void mapBitmapsToMarkers(List<Uint8List> bitmaps, Function(Set<Marker>) callback) {
+
+  int currentMarkerIndex = 0;
+  void mapBitmapsToMarkers(
+    List<Uint8List> bitmaps,
+    Function(Set<Marker>) callback,
+  ) {
     bitmaps.asMap().forEach((i, bmp) {
       _customMarkers.add(Marker(
-        markerId: MarkerId("$i"),
-        position: LatLng(
-            double.parse(jobList[i].lat!), double.parse(jobList[i].long!)),
-        icon: BitmapDescriptor.fromBytes(bmp),
-      ));
+          markerId: MarkerId("$i"),
+          position: LatLng(
+              double.parse(jobList[i].lat!), double.parse(jobList[i].long!)),
+          icon: BitmapDescriptor.fromBytes(bmp),
+          onTap: ()async {
+            PageNotifier.generate(index: i,callback: (page,pageIndex){
+              currentMarkerIndex = i;
+              //page.animateToPage(i,duration: Duration(milliseconds: 2500),curve: Curves.easeInOut);
+              page.jumpToPage(i);
+            });
+          }));
     });
-    // notifyListeners();
     callback(_customMarkers.toSet());
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
 
-  List<List<PointLatLng>> points = [];
-  List<LatLng> polylineCoordinates = [];
-  PolylinePoints polylinePoints = PolylinePoints();
-  static const String googleAPIKey = 'AIzaSyBOFccMjpf2pFo5z7lnTi16SR3b43xobKA';
-
-  void setPolyLine() async {
-    var result = await polylinePoints
-        .getRouteBetweenCoordinates(
-            googleAPIKey,
-            PointLatLng(24.863455, 67.051977),
-            PointLatLng(24.8631904, 67.0561541))
-        .then((value) => null, onError: (exception) {
-      print(exception);
-    });
-    points.add(result.points);
-    // for (int i = 0; i <= _jobList.length-1; i++) {
-    //   var nextPoint = i + 1;
-    //   var result = await polylinePoints.getRouteBetweenCoordinates(
-    //       googleAPIKey,
-    //       PointLatLng(double.parse(_jobList[i].lat.toString()), double.parse(_jobList[i].long.toString())),
-    //       PointLatLng(double.parse(_jobList[nextPoint].lat.toString()),
-    //           double.parse(_jobList[nextPoint].long.toString())));
-    //   if (result.points.isNotEmpty)
-    //     print("faran ${result.points}");
-    //   points.add(result.points);
-    // }
-  }
-
-  Set<Polyline> getPolyLine() {
-    setPolyLine();
-    return {};
-  }
+  // List<List<PointLatLng>> points = [];
+  // List<LatLng> polylineCoordinates = [];
+  // PolylinePoints polylinePoints = PolylinePoints();
+  // static const String googleAPIKey = 'AIzaSyBOFccMjpf2pFo5z7lnTi16SR3b43xobKA';
+  //
+  // Future<PolylineResult> setPolyLine() async {
+  //    return polylinePoints
+  //       .getRouteBetweenCoordinates(googleAPIKey, PointLatLng(24.863455, 67.051977), PointLatLng(24.8631904, 67.06666))
+  //       .then((value) => value, onError: (exception) {
+  //     print(exception);
+  //   });
+  //   //points.add(result.points);
+  //   // for (int i = 0; i <= _jobList.length-1; i++) {
+  //   //   var nextPoint = i + 1;
+  //   //   var result = await polylinePoints.getRouteBetweenCoordinates(
+  //   //       googleAPIKey,
+  //   //       PointLatLng(double.parse(_jobList[i].lat.toString()), double.parse(_jobList[i].long.toString())),
+  //   //       PointLatLng(double.parse(_jobList[nextPoint].lat.toString()),
+  //   //           double.parse(_jobList[nextPoint].long.toString())));
+  //   //   if (result.points.isNotEmpty)
+  //   //     print("faran ${result.points}");
+  //   //   points.add(result.points);
+  //   // }
+  // }
+  //
+  // Set<Polyline> getPolyLine() {
+  //   setPolyLine();
+  //   return {};
+  // }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
   //mapController
   void mapController(GoogleMapController controller) {
@@ -282,6 +300,7 @@ class MapProvider with ChangeNotifier {
     _controller.complete(controller);
     notifyListeners();
   }
+
   //initial camera Position on Startup
   CameraPosition initialCameraPosition() {
     return CameraPosition(
@@ -289,22 +308,24 @@ class MapProvider with ChangeNotifier {
         zoom: 14,
         bearing: 15);
   }
+
   //move to current Postion
-  void upDateCameraNewPosition(double lat,double lng) {
+  void upDateCameraNewPosition(double lat, double lng) {
     _mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: LatLng(lat, lng),
-        zoom: 18,
-        tilt: 30,
-        bearing: 50)));
+        target: LatLng(lat, lng), zoom: 18, tilt: 30, bearing: 50)));
   }
-
-  //onCameraMove
-  void onCameraMove(CameraPosition cameraPosition) {}
-
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 }
 
-class MarkerConfig{}
+class PageNotifier {
+  PageNotifier() {
+    _pageController = PageController(viewportFraction: 0.8, initialPage: 0);
+  }
+
+   static PageController? _pageController;
+
+  PageController? get pageController => _pageController;
+
+   static void generate({int? index,Function(PageController, int)? callback}) {
+    callback!(_pageController!,index!);
+  }
+}

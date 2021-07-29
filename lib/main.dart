@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/DataProvider/joblistProvider.dart';
 import 'package:flutter_app/businessLogic/SignUp_validation_Provider.dart';
+import 'package:flutter_app/businessLogic/signIn_validation.dart';
 import 'package:flutter_app/myApp.dart';
 import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
 
@@ -19,6 +20,7 @@ void main()async {
   runApp(MultiProvider(providers: [
     StreamProvider<User>(create: (context)=>FirebaseAuth.instance.authStateChanges(),initialData: null,),
     ChangeNotifierProvider(create: (context) => FormProvider()),
+    Provider(create: (context)=>SignInFormProvider(),),
     ChangeNotifierProvider(create: (context)=>AuthProvider()),
     ChangeNotifierProvider(create: (context)=>JobListProvider()),
   ], child: MyApp()));
