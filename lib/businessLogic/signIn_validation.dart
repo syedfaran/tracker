@@ -4,17 +4,8 @@ import 'package:flutter/material.dart';
 class SignInFormProvider {
   Validator _email = Validator(null, null);
   Validator _password = Validator(null, null);
-
   Validator get getEmail => _email;
-
   Validator get getPassword => _password;
-  bool get isValid {
-    if (_email.value != null && _password.value != null ){
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   void setEmail(String email) {
     if (email.isNotEmpty) {

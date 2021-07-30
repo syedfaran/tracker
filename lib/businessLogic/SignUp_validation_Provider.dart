@@ -10,7 +10,7 @@ class Validator{
 }
 
 
-class FormProvider with ChangeNotifier {
+class SignUpFormProvider with ChangeNotifier {
   Validator _email = Validator(null, null);
   Validator _password = Validator(null, null);
   Validator _name = Validator(null, null);

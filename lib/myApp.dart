@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/helper/theme/app_theme.dart';
+import 'package:flutter_app/theme/app_theme.dart';
 import 'package:flutter_app/route_generator.dart';
 
 

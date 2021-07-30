@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/DataProvider/joblistProvider.dart';
+import 'package:flutter_app/DataProvider/joblist_Provider.dart';
 import 'package:flutter_app/businessLogic/SignUp_validation_Provider.dart';
 import 'package:flutter_app/businessLogic/signIn_validation.dart';
 import 'package:flutter_app/myApp.dart';
@@ -18,8 +18,9 @@ void main()async {
   await Firebase.initializeApp();
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   runApp(MultiProvider(providers: [
-    StreamProvider<User>(create: (context)=>FirebaseAuth.instance.authStateChanges(),initialData: null,),
-    ChangeNotifierProvider(create: (context) => FormProvider()),
+    StreamProvider<User>.value(value: FirebaseAuth.instance.authStateChanges(), initialData: null),
+    //StreamProvider<User>(create: (context)=>,initialData: null,),
+    ChangeNotifierProvider(create: (context) => SignUpFormProvider()),
     Provider(create: (context)=>SignInFormProvider(),),
     ChangeNotifierProvider(create: (context)=>AuthProvider()),
     ChangeNotifierProvider(create: (context)=>JobListProvider()),

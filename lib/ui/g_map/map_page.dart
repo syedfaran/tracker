@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/joblistProvider.dart';
+import 'package:flutter_app/DataProvider/joblist_Provider.dart';
 import 'package:flutter_app/customWidget/custom_loader.dart';
 import 'package:flutter_app/helper/screenUtil.dart';
 import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
 import 'package:flutter_app/ui/g_map/Markergenerator.dart';
 import 'package:flutter_app/ui/g_map/g_map_provider.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-class MapPage extends StatelessWidget {
-  final mapProvider = MapProvider();
+class MapPage extends StatefulWidget {
+  @override
+  _MapPageState createState() => _MapPageState();
+}
 
+class _MapPageState extends State<MapPage> {
+  final mapProvider = MapProvider();
+  @override
+  void dispose() {
+   // mapProvider.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -27,7 +37,7 @@ class MapPage extends StatelessWidget {
             body: Stack(
               children: [
                 if (pro.mapNotifier == NotifierState.loading)
-                 Align(child: CustomLoader()),
+                 const Align(child: CustomLoader()),
                 if (pro.mapNotifier == NotifierState.loaded)
                 GoogleMap(
                   markers: pro.getMarkers,
@@ -39,7 +49,7 @@ class MapPage extends StatelessWidget {
                   zoomControlsEnabled: false,
                 ),
                 if (pro.mapNotifier == NotifierState.loaded)
-                _MapJobScrollView(),
+                const _MapJobScrollView(),
               ],
             ),
           );

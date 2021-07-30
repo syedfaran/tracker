@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter_app/ui/g_map/Markergenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/joblistProvider.dart';
+import 'package:flutter_app/DataProvider/joblist_Provider.dart';
 import 'package:flutter_app/data/model/job_list_model.dart';
 import 'package:flutter_app/helper/toastNotfier.dart';
 import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
@@ -12,124 +12,20 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'map_marker.dart';
 
-// class MapProvider with ChangeNotifier {
-//   NotifierState _mapNotifier = NotifierState.initial;
-//   NotifierState get mapNotifier => _mapNotifier;
-//   Completer<GoogleMapController> _controller = Completer();
-//   late GoogleMapController _mapController;
-//   late Position _position;
-//   Position get getPosition => _position;
-//   void _setPosition(Position position) {
-//     _position = position;
-//     notifyListeners();
-//   }
-//   void setMapNotifier(NotifierState notifier) {
-//     _mapNotifier = notifier;
-//     notifyListeners();
-//   }
-//
-//
-//   //methods
-//   //accessPermission and get Current Location
-//   Future<void> determinePosition(BuildContext context) async {
-//     setMapNotifier(NotifierState.loading);
-//     bool serviceEnabled;
-//     LocationPermission permission;
-//     // Test if location services are enabled.
-//     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-//     if (!serviceEnabled) {
-//       // Location services logiuare not enabled don't continue
-//       // accessing the position and request users of the
-//       // App to enable the location services.
-//       WidgetsBinding.instance!.addPostFrameCallback((_) {
-//         Navigator.pop(context);
-//         // Add Your Code here.
-//       });
-//       ToastNotifier.showToast(context, 'Location services are disabled');
-//       return Future.error('Location services are disabled.');
-//     }
-//
-//     permission = await Geolocator.checkPermission();
-//     if (permission == LocationPermission.denied) {
-//       permission = await Geolocator.requestPermission();
-//       if (permission == LocationPermission.denied) {
-//         // Permissions are denied, next time you could try
-//         // requesting permissions again (this is also where
-//         // Android's shouldShowRequestPermissionRationale
-//         // returned true. According to Android guidelines
-//         // your App should show an explanatory UI now.
-//         ToastNotifier.showToast(context, 'Location permissions are denied');
-//         Navigator.pop(context);
-//         return Future.error('Location permissions are denied');
-//       }
-//     }
-//
-//     if (permission == LocationPermission.deniedForever) {
-//       // Permissions are denied forever, handle appropriately.
-//       ToastNotifier.showToast(context,
-//           'Location permissions are permanently denied, we cannot request permissions.');
-//       Navigator.pop(context);
-//       return Future.error(
-//           'Location permissions are permanently denied, we cannot request permissions.');
-//     }
-//
-//     // When we reach here, permissions are granted and we can
-//     // continue accessing the position of the device.
-//     await Geolocator.getCurrentPosition().then((value) {
-//       _setPosition(value);
-//       // upDateCameraNewPosition(value);
-//     });
-//     setMapNotifier(NotifierState.loaded);
-//   }
-//
-//   Set<Marker> getMakers([BuildContext? context]) {
-//     List<Jobs> list = [];
-//     context!.read<JobListProvider>().jobList.map((category) {
-//       category.map((single) {
-//         single.jobs!.map((data) {
-//           list.add(data);
-//         }).toList();
-//       }).toList();
-//     });
-//     return list
-//         .map((pos) => Marker(
-//       markerId: MarkerId(pos.task.toString()),
-//       position: LatLng(double.parse(pos.lat!), double.parse(pos.long!)),
-//     ))
-//         .toSet();
-//   }
-//
-//   //mapController
-//   void mapController(GoogleMapController controller) {
-//     _mapController = controller;
-//     _controller.complete(controller);
-//     notifyListeners();
-//   }
-//
-//   //initial camera Position on Startup
-//   CameraPosition initialCameraPosition() {
-//     return CameraPosition(
-//         target: LatLng(_position.latitude, _position.longitude),
-//         zoom: 14,
-//         bearing: 15);
-//   }
-//
-//   void upDateCameraNewPosition(Position position) {
-//     print('bilal');
-//     _mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-//         target: LatLng(position.latitude, position.longitude),
-//         zoom: 14,
-//         tilt: 30,
-//         bearing: 15)));
-//   }
-//   //onCameraMove
-//   void onCameraMove(CameraPosition cameraPosition){
-//
-//   }
-// }
 
-class MapProvider with ChangeNotifier {
+class MapProvider with ChangeNotifier,StreamCurrentUser,MapService {
+  MapProvider(){
+    positionStream.listen((position) {
+      centerScreen(position);
+    });
+  }
+  // @override
+  // void dispose() {
+  //   print('dispose');
+  //   super.dispose();
+  // }
   final List<Jobs> jobList = [];
+
   NotifierState _mapNotifier = NotifierState.initial;
 
   NotifierState get mapNotifier => _mapNotifier;
@@ -157,46 +53,7 @@ class MapProvider with ChangeNotifier {
   //accessPermission and get Current Location
   Future<void> determinePosition(BuildContext context) async {
     setMapNotifier(NotifierState.loading);
-    bool serviceEnabled;
-    LocationPermission permission;
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services logiuare not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
-        Navigator.pop(context);
-        // Add Your Code here.
-      });
-      ToastNotifier.showToast(context, 'Location services are disabled');
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        ToastNotifier.showToast(context, 'Location permissions are denied');
-        Navigator.pop(context);
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      ToastNotifier.showToast(context,
-          'Location permissions are permanently denied, we cannot request permissions.');
-      Navigator.pop(context);
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
+    await determinePermission(context);
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     await Geolocator.getCurrentPosition().then((value) {
@@ -207,11 +64,12 @@ class MapProvider with ChangeNotifier {
   }
 
   //markers
-  List<MapMarker> _mapMarkers = [];
   List<Marker> _customMarkers = [];
-
   setMakers(BuildContext context) async {
-    context.read<JobListProvider>().jobList.map((category) {
+    context
+        .read<JobListProvider>()
+        .jobList
+        .map((category) {
       category.map((single) {
         single.jobs!.map((data) {
           // print("${data.jobNo}and ${data.task}");
@@ -228,10 +86,7 @@ class MapProvider with ChangeNotifier {
         notifyListeners();
       });
     }).generate(context);
-
-
   }
-
   List<Widget> _markerWidgets() {
     List<Widget> list = [];
     jobList.forEach((element) {
@@ -239,20 +94,17 @@ class MapProvider with ChangeNotifier {
     });
     return list;
   }
-
   int currentMarkerIndex = 0;
-  void mapBitmapsToMarkers(
-    List<Uint8List> bitmaps,
-    Function(Set<Marker>) callback,
-  ) {
+  void mapBitmapsToMarkers(List<Uint8List> bitmaps,
+      Function(Set<Marker>) callback,) {
     bitmaps.asMap().forEach((i, bmp) {
       _customMarkers.add(Marker(
           markerId: MarkerId("$i"),
           position: LatLng(
               double.parse(jobList[i].lat!), double.parse(jobList[i].long!)),
           icon: BitmapDescriptor.fromBytes(bmp),
-          onTap: ()async {
-            PageNotifier.generate(index: i,callback: (page,pageIndex){
+          onTap: () async {
+            PageNotifier.generate(index: i, callback: (page, pageIndex) {
               currentMarkerIndex = i;
               //page.animateToPage(i,duration: Duration(milliseconds: 2500),curve: Curves.easeInOut);
               page.jumpToPage(i);
@@ -298,7 +150,6 @@ class MapProvider with ChangeNotifier {
   void mapController(GoogleMapController controller) {
     _mapController = controller;
     _controller.complete(controller);
-    notifyListeners();
   }
 
   //initial camera Position on Startup
@@ -314,18 +165,79 @@ class MapProvider with ChangeNotifier {
     _mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         target: LatLng(lat, lng), zoom: 18, tilt: 30, bearing: 50)));
   }
+
+  Future<void> centerScreen(Position position) async {
+    print('faran');
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: LatLng(position.latitude, position.longitude), zoom: 18.0)));
+
+  }
 }
+
 
 class PageNotifier {
   PageNotifier() {
     _pageController = PageController(viewportFraction: 0.8, initialPage: 0);
   }
 
-   static PageController? _pageController;
+  static PageController? _pageController;
 
   PageController? get pageController => _pageController;
 
-   static void generate({int? index,Function(PageController, int)? callback}) {
-    callback!(_pageController!,index!);
+  static void generate({int? index, Function(PageController, int)? callback}) {
+    callback!(_pageController!, index!);
   }
 }
+class StreamCurrentUser {
+Stream<Position> positionStream = Geolocator.getPositionStream(distanceFilter: 10,desiredAccuracy: LocationAccuracy.high);
+
+}
+class MapService{
+  Future<void> determinePermission(BuildContext context) async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services logiuare not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        Navigator.pop(context);
+        // Add Your Code here.
+      });
+      ToastNotifier.showToast(context, 'Location services are disabled');
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        ToastNotifier.showToast(context, 'Location permissions are denied');
+        Navigator.pop(context);
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      ToastNotifier.showToast(context,
+          'Location permissions are permanently denied, we cannot request permissions.');
+      Navigator.pop(context);
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+  }
+}
+
+
+
+
+

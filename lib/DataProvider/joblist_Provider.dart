@@ -24,7 +24,7 @@ class JobListProvider with ChangeNotifier {
     _jobList = job;
     notifyListeners();
   }
-  void setJobList()async{
+  Future<void> setJobList()async{
     _setState(NotifierState.loading);
     await _repo.getListOfJobs().then((value) => _setJob(value));
     _setState(NotifierState.loaded);

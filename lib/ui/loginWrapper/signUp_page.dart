@@ -13,7 +13,7 @@ class RegisterState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final formPro = Provider.of<FormProvider>(context);
+    final signUpFromPro = Provider.of<SignUpFormProvider>(context);
     final authPro = Provider.of<AuthProvider>(context);
     print(authPro.state);
     return Container(
@@ -36,20 +36,20 @@ class RegisterState extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const SizedBox(height: 20),
-                TextFieldContainer(hintText: AppString.name,callback: formPro.setName,errorText: formPro.getName.error),
+                TextFieldContainer(hintText: AppString.name,callback: signUpFromPro.setName,errorText: signUpFromPro.getName.error),
                 const SizedBox(height: 20),
-                TextFieldContainer(hintText: AppString.email,callback: formPro.setEmail,errorText: formPro.getEmail.error),
+                TextFieldContainer(hintText: AppString.email,callback: signUpFromPro.setEmail,errorText: signUpFromPro.getEmail.error),
                 const SizedBox(height: 20),
-                TextFieldContainer(hintText: AppString.password,callback: formPro.setPassword,errorText: formPro.getPassword.error,obscureText: true),
+                TextFieldContainer(hintText: AppString.password,callback: signUpFromPro.setPassword,errorText: signUpFromPro.getPassword.error,obscureText: true),
                 const SizedBox(height: 20),
-                TextFieldContainer(hintText: AppString.confirmPassword,callback: formPro.setConfirmPassword,errorText: formPro.getConfirmPassword.error,obscureText: true),
+                TextFieldContainer(hintText: AppString.confirmPassword,callback: signUpFromPro.setConfirmPassword,errorText: signUpFromPro.getConfirmPassword.error,obscureText: true),
                 const SizedBox(height: 20),
               ],
             ),
             Column(
               children: [
                 ElevatedButton(onPressed: (){
-                  context.read<AuthProvider>().createUser(formPro.getEmail.value!, formPro.getPassword.value!,formPro.getName.value!);
+                  context.read<AuthProvider>().createUser(signUpFromPro.getEmail.value!, signUpFromPro.getPassword.value!,signUpFromPro.getName.value!);
                 }, child: Text(AppString.signup),
                 ),
                 if (authPro.state == NotifierState.loading)
@@ -66,10 +66,10 @@ class RegisterState extends StatelessWidget {
                         return SizedBox();
                       },
                       (success) => const Text(AppString.registerSuccessfully)),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 TextButton.icon(
                     onPressed: () {
-                      formPro.submit();
+                      signUpFromPro.submit();
                       context.read<LoginRegisterProvider>().eventToState(LoginEvent.login);
                     },
                     icon: Icon(Icons.arrow_back_ios_outlined),

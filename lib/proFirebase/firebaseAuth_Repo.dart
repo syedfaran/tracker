@@ -1,4 +1,4 @@
-import 'package:flutter_app/proFirebase/databaseService.dart';
+import 'package:flutter_app/proFirebase/fireStore_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 

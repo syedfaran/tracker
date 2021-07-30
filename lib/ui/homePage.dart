@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app/DataProvider/joblistProvider.dart';
+import 'package:flutter_app/DataProvider/joblist_Provider.dart';
 import 'package:flutter_app/businessLogic/loginORregisterbloc.dart';
 import 'package:flutter_app/data/model/job_list_model.dart';
 import 'package:flutter_app/data/model/user_model.dart';
 import 'package:flutter_app/helper/app_String.dart';
 import 'package:flutter_app/helper/screenUtil.dart';
-import 'package:flutter_app/proFirebase/databaseService.dart';
+import 'package:flutter_app/proFirebase/fireStore_provider.dart';
 import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app/route_generator.dart';
