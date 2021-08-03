@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:flutter_app/model/jobListModel.dart';
+import 'package:flutter_app/model/JobListModel.dart';
 import 'package:flutter_app/ui/appUtil/toastNotfier.dart';
 import 'package:flutter_app/ui/pages/googlemapPage/Markergenerator.dart';
 import 'package:provider/provider.dart';

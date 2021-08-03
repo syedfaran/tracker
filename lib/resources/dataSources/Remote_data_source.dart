@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_app/model/jobListModel.dart';
+import 'package:flutter_app/model/JobListModel.dart';
 import 'package:flutter_app/ui/appUtil/appString.dart';
 import 'package:flutter_app/resources/repository/firebaseAuth_Repo.dart';
 import 'package:http/http.dart' as http;

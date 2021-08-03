@@ -5,7 +5,7 @@ import 'package:flutter_app/DataProvider/formProvider/wrapper_Provider.dart';
 import 'package:flutter_app/DataProvider/jobListProvider.dart';
 import 'package:flutter_app/DataProvider/databaseProvider.dart';
 import 'package:flutter_app/DataProvider/firebaseAuthProvider.dart';
-import 'package:flutter_app/model/jobListModel.dart';
+import 'package:flutter_app/model/JobListModel.dart';
 import 'package:flutter_app/model/userModel.dart';
 import 'package:flutter_app/ui/appUtil/appString.dart';
 import 'package:flutter_app/ui/appUtil/screenUtil.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/jobListModel.dart';
+import 'package:flutter_app/model/JobListModel.dart';
 import 'package:flutter_app/ui/widgets/customRText.dart';
 
 class LowerContent extends StatelessWidget {
