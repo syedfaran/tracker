@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/customWidget/customRText.dart';
 import 'package:flutter_app/data/model/job_list_model.dart';
+import 'package:flutter_app/presentation/customWidget/customRText.dart';
+
 
 class UpperContent extends StatelessWidget {
   final Jobs? job;

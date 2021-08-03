@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/helper/app_String.dart';
+import 'package:flutter_app/presentation/pages/detail_page/detail_page.dart';
+import 'package:flutter_app/presentation/pages/g_map/map_page.dart';
+import 'package:flutter_app/presentation/pages/homePage.dart';
+import 'package:flutter_app/presentation/pages/wrapper.dart';
 
-import 'package:flutter_app/ui/detail_page/detail_page.dart';
-import 'package:flutter_app/ui/g_map/map_page.dart';
-import 'package:flutter_app/ui/homePage.dart';
-import 'package:flutter_app/ui/wrapper.dart';
 
 class RouteObservers {
   static RouteObserver<dynamic> routeObserver = RouteObserver<PageRoute>();
@@ -19,20 +20,19 @@ class RouteGenerator {
     }
      print(arguments.data.toString());
     switch (settings.name) {
-      case '/':
+      case AppRouteString.initialPage:
         return MaterialPageRoute(
           //call wrapper
-          builder: (context) => Wrapper(),
+          builder: (context) => const Wrapper(),
         );
-      case '/homepage':
+      case AppRouteString.homePage:
         return MaterialPageRoute(
-            builder: (context) =>
-                RouteAwareWidget('/homepage', child: HomePage()));
+            builder: (context) => const HomePage());
       case '/detailPage':
         return MaterialPageRoute(
             builder: (context) => DetailPage(mainJob: arguments.data));
       case '/MapPage':
-        return MaterialPageRoute(builder: (context) => MapPage());
+        return MaterialPageRoute(builder: (context) => const MapPage());
     }
   }
 }
@@ -85,7 +85,7 @@ class ScreenArguments<T> {
   final T? data;
   final T? secondData;
 
-  ScreenArguments(
+  const ScreenArguments(
       {this.tab,
       this.currentPage,
       this.message,

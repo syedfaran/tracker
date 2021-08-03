@@ -33,7 +33,7 @@ class _MapMarkerState extends State<MapMarker> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 8.0),
                 child: Text(
-                  widget.jobNo,
+                  widget.jobNo!,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color:Theme.of(context).primaryColor),
                 ),

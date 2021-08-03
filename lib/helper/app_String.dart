@@ -7,7 +7,8 @@ class AppString {
       'Hello!\nSignup to\nget started';
 
   static const String signIn = 'Sign In';
-  static const String signup = 'Create account';
+  static const String createAccount = 'Create account';
+  static const String backToLoginPage = 'Back To LoginPage';
   static const String email = 'Email Address ';
   static const String password = 'Password';
   static const String name = 'Name';
@@ -17,6 +18,7 @@ class AppString {
   static const String start = 'START';
   static const String registerSuccessfully = 'User Register Successfully';
   static const String signedInSuccessfully = 'User Signed in Successfully';
+  static const String loading = 'loading';
 }
 
 class AppRouteString {

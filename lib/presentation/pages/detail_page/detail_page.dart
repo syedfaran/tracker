@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_app/data/model/job_list_model.dart';
 import 'package:flutter_app/helper/screenUtil.dart';
-import 'package:flutter_app/ui/detail_page/lowerSection.dart';
-import 'package:flutter_app/ui/detail_page/upperSection.dart';
+import 'package:flutter_app/presentation/pages/detail_page/lowerSection.dart';
+import 'package:flutter_app/presentation/pages/detail_page/upperSection.dart';
 import 'package:slimy_card/slimy_card.dart';
 
 class DetailPage extends StatelessWidget {
@@ -16,7 +15,7 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          mainJob!.category,
+          mainJob!.category!,
           style: Theme.of(context)
               .textTheme
               .headline1!
@@ -37,12 +36,6 @@ class DetailPage extends StatelessWidget {
       body: Container(
         height: AppConfig.of(context).appHeight(100),
         width: AppConfig.of(context).appWidth(100),
-        // child: Center(
-        //   child: _SlimyWidget(
-        //     list: mainJob!.jobs,
-        //     mainJob: mainJob,
-        //   ),
-        // )),
         child: _SlimyWidget(
           list: mainJob!.jobs,
           mainJob: mainJob,
@@ -65,8 +58,8 @@ class _SlimyWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: SlimyCard(
-            footerColor: Colors.yellow[500],
-            color: Colors.yellow[100],
+            footerColor: Colors.lime,
+            color: Theme.of(context).primaryColorLight,
             width: AppConfig.of(context).appWidth(85),
             topCardHeight: AppConfig.of(context).appWidth(46),
             bottomCardHeight: 300,

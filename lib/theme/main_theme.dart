@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/theme/app_color.dart';
 
 ThemeData themeOne = ThemeData(
-
     brightness: Brightness.light,
-    backgroundColor: AppColor.bodyColor,
-    scaffoldBackgroundColor: AppColor.bodyColor,
-    hintColor: AppColor.textColor,
+    backgroundColor: AppColor.scaffoldColor,
+    scaffoldBackgroundColor: AppColor.scaffoldColor,
+    hintColor: AppColor.textFieldHintColor,
     primaryColorLight: AppColor.buttonBackgroundColor,
     textTheme: TextTheme(
         headline1: TextStyle(

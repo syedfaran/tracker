@@ -1,5 +1,4 @@
-import 'package:flutter_app/businessLogic/SignUp_validation_Provider.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_app/presentation/businessLogic/SignUp_validation_Provider.dart';
 
 class SignInFormProvider {
   Validator _email = Validator(null, null);

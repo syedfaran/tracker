@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:flutter_app/ui/g_map/Markergenerator.dart';
+import 'package:flutter_app/presentation/pages/g_map/Markergenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/DataProvider/joblist_Provider.dart';
 import 'package:flutter_app/data/model/job_list_model.dart';
 import 'package:flutter_app/helper/toastNotfier.dart';
-import 'package:flutter_app/proFirebase/firebaseAuth_provider.dart';
+import 'package:flutter_app/DataProvider/firebaseAuth_provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'map_marker.dart';
 
 
