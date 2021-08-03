@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/presentation/pages/loginWrapper/signIn_page.dart';
-import 'package:flutter_app/presentation/pages/loginWrapper/signUp_page.dart';
+import 'package:flutter_app/ui/pages/loginWrapper/signIn_page.dart';
+import 'package:flutter_app/ui/pages/loginWrapper/signUp_page.dart';
 
 
 enum LoginEvent { login, register }

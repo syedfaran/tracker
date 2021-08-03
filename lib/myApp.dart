@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/presentation/app_util/app_String.dart';
-import 'package:flutter_app/presentation/theme/app_theme.dart';
 import 'package:flutter_app/route_generator.dart';
+import 'package:flutter_app/ui/appUtil/appString.dart';
+import 'package:flutter_app/ui/theme/appTheme.dart';
 
 
 

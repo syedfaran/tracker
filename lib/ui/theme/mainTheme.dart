@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/presentation/theme/app_color.dart';
+import 'package:flutter_app/ui/theme/appColor.dart';
 
 ThemeData themeOne = ThemeData(
     brightness: Brightness.light,

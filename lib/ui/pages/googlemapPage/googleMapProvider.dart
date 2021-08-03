@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:flutter_app/model/job_list_model.dart';
-import 'package:flutter_app/presentation/app_util/toastNotfier.dart';
-import 'package:flutter_app/presentation/pages/g_map/Markergenerator.dart';
+import 'package:flutter_app/model/jobListModel.dart';
+import 'package:flutter_app/ui/appUtil/toastNotfier.dart';
+import 'package:flutter_app/ui/pages/googlemapPage/Markergenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/joblist_Provider.dart';
-import 'package:flutter_app/DataProvider/firebaseAuth_provider.dart';
+import 'package:flutter_app/DataProvider/jobListProvider.dart';
+import 'package:flutter_app/DataProvider/firebaseAuthProvider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'map_marker.dart';
+import 'mapMarker.dart';
 
 
 class MapProvider with ChangeNotifier,StreamCurrentUser,MapService {

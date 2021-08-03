@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/DataProvider/form_provider/wrapper_Provider.dart';
-import 'package:flutter_app/DataProvider/joblist_Provider.dart';
-import 'package:flutter_app/DataProvider/fireStore_provider.dart';
-import 'package:flutter_app/DataProvider/firebaseAuth_provider.dart';
-import 'package:flutter_app/model/job_list_model.dart';
-import 'package:flutter_app/model/user_model.dart';
-import 'package:flutter_app/presentation/app_util/app_String.dart';
-import 'package:flutter_app/presentation/app_util/screenUtil.dart';
-import 'package:flutter_app/presentation/widgets/custom_elevatedButton.dart';
-import 'package:flutter_app/presentation/widgets/custom_loader.dart';
+import 'package:flutter_app/DataProvider/formProvider/wrapper_Provider.dart';
+import 'package:flutter_app/DataProvider/jobListProvider.dart';
+import 'package:flutter_app/DataProvider/databaseProvider.dart';
+import 'package:flutter_app/DataProvider/firebaseAuthProvider.dart';
+import 'package:flutter_app/model/jobListModel.dart';
+import 'package:flutter_app/model/userModel.dart';
+import 'package:flutter_app/ui/appUtil/appString.dart';
+import 'package:flutter_app/ui/appUtil/screenUtil.dart';
+import 'package:flutter_app/ui/widgets/custom_elevatedButton.dart';
+import 'package:flutter_app/ui/widgets/custom_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app/route_generator.dart';
 

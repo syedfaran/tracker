@@ -1,6 +1,6 @@
 
 
-import 'SignUp_validation_Provider.dart';
+import 'SignUpValidationProvider.dart';
 
 class SignInFormProvider {
   Validator _email = Validator(null, null);

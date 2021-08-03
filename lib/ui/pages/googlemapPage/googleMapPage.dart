@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/firebaseAuth_provider.dart';
-import 'package:flutter_app/presentation/app_util/screenUtil.dart';
-
-import 'package:flutter_app/presentation/pages/g_map/g_map_provider.dart';
-import 'package:flutter_app/presentation/widgets/custom_loader.dart';
-
+import 'package:flutter_app/DataProvider/firebaseAuthProvider.dart';
+import 'package:flutter_app/ui/appUtil/screenUtil.dart';
+import 'package:flutter_app/ui/pages/googlemapPage/googleMapProvider.dart';
+import 'package:flutter_app/ui/widgets/custom_loader.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 class MapPage extends StatefulWidget {

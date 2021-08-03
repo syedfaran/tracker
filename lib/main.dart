@@ -3,13 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/DataProvider/joblist_Provider.dart';
+import 'package:flutter_app/DataProvider/jobListProvider.dart';
 import 'package:flutter_app/myApp.dart';
-import 'package:flutter_app/DataProvider/firebaseAuth_provider.dart';
+import 'package:flutter_app/DataProvider/firebaseAuthProvider.dart';
 import 'package:provider/provider.dart';
-import 'DataProvider/form_provider/SignUp_validation_Provider.dart';
-import 'DataProvider/form_provider/signIn_validation_Provider.dart';
-import 'DataProvider/form_provider/wrapper_Provider.dart';
+
+import 'DataProvider/formProvider/SignUpValidationProvider.dart';
+import 'DataProvider/formProvider/signInValidationProvider.dart';
+import 'DataProvider/formProvider/wrapper_Provider.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

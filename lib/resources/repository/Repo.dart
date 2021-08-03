@@ -1,7 +1,7 @@
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter_app/model/job_list_model.dart';
-import 'package:flutter_app/resources/data_sources/Remote_data_source.dart';
+import 'package:flutter_app/model/jobListModel.dart';
+import 'package:flutter_app/resources/dataSources/Remote_data_source.dart';
 import 'package:flutter_app/resources/repository/firebaseAuth_Repo.dart';
 
 

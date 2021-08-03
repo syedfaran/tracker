@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/job_list_model.dart';
-import 'package:flutter_app/presentation/app_util/app_String.dart';
-import 'package:flutter_app/presentation/pages/detail_page/detail_page.dart';
-import 'package:flutter_app/presentation/pages/g_map/map_page.dart';
-import 'package:flutter_app/presentation/pages/homePage.dart';
-import 'package:flutter_app/presentation/pages/wrapper.dart';
+import 'package:flutter_app/model/jobListModel.dart';
+import 'package:flutter_app/ui/appUtil/appString.dart';
+import 'package:flutter_app/ui/pages/detail_page/detailPage.dart';
+import 'package:flutter_app/ui/pages/googlemapPage/googleMapPage.dart';
+import 'package:flutter_app/ui/pages/homePage.dart';
+import 'package:flutter_app/ui/pages/wrapper.dart';
+
 
 class RouteObservers {
   static RouteObserver<dynamic> routeObserver = RouteObserver<PageRoute>();
