@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/firebaseAuthProvider.dart';
+import 'package:flutter_app/DataProvider/FirebaseAuthProvider.dart';
 import 'package:flutter_app/model/JobListModel.dart';
 import 'package:flutter_app/resources/repository/Repo.dart';
-import 'package:flutter_app/resources/repository/firebaseAuth_Repo.dart';
+import 'package:flutter_app/resources/repository/FirebaseAuthRepo.dart';
 
 class JobListProvider with ChangeNotifier {
   JobListProvider(){

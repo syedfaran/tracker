@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/repository/firebaseAuth_Repo.dart';
+import 'package:flutter_app/resources/repository/FirebaseAuthRepo.dart';
 
 enum NotifierState { initial, loading, loaded }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_app/model/JobListModel.dart';
 
-import 'package:flutter_app/ui/widgets/customRText.dart';
+import 'package:flutter_app/ui/widgets/CustomRichText.dart';
 
 
 class UpperContent extends StatelessWidget {

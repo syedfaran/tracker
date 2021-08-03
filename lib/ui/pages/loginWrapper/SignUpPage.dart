@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/firebaseAuthProvider.dart';
+import 'package:flutter_app/DataProvider/FirebaseAuthProvider.dart';
 import 'package:flutter_app/DataProvider/formProvider/SignUpValidationProvider.dart';
-import 'package:flutter_app/DataProvider/formProvider/wrapper_Provider.dart';
-import 'package:flutter_app/ui/appUtil/appString.dart';
-import 'package:flutter_app/ui/appUtil/screenUtil.dart';
-import 'package:flutter_app/ui/appUtil/toastNotfier.dart';
-import 'package:flutter_app/ui/widgets/custom_elevatedButton.dart';
-import 'package:flutter_app/ui/widgets/custom_iconTextButton.dart';
+import 'package:flutter_app/DataProvider/formProvider/WrapperProvider.dart';
+import 'package:flutter_app/ui/appUtil/AppString.dart';
+import 'package:flutter_app/ui/appUtil/ScreenUtil.dart';
+import 'package:flutter_app/ui/appUtil/ToastNotfier.dart';
+import 'package:flutter_app/ui/widgets/CustomElevatedButton.dart';
+import 'package:flutter_app/ui/widgets/CustomIconTextButton.dart';
 
-import 'package:flutter_app/ui/widgets/textField_container.dart';
+import 'package:flutter_app/ui/widgets/TextFieldContainer.dart';
 import 'package:provider/provider.dart';
 
 class RegisterState extends StatelessWidget {

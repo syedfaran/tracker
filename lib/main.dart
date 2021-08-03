@@ -3,14 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/DataProvider/jobListProvider.dart';
+import 'package:flutter_app/DataProvider/JobListProvider.dart';
 import 'package:flutter_app/myApp.dart';
-import 'package:flutter_app/DataProvider/firebaseAuthProvider.dart';
+import 'package:flutter_app/DataProvider/FirebaseAuthProvider.dart';
 import 'package:provider/provider.dart';
 
 import 'DataProvider/formProvider/SignUpValidationProvider.dart';
-import 'DataProvider/formProvider/signInValidationProvider.dart';
-import 'DataProvider/formProvider/wrapper_Provider.dart';
+import 'DataProvider/formProvider/SignInValidationProvider.dart';
+import 'DataProvider/formProvider/WrapperProvider.dart';
 
 
 void main() async {
