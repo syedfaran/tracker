@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/data/model/job_list_model.dart';
-import 'package:flutter_app/helper/screenUtil.dart';
+
+import 'package:flutter_app/model/job_list_model.dart';
+import 'package:flutter_app/presentation/app_util/screenUtil.dart';
 import 'package:flutter_app/presentation/pages/detail_page/lowerSection.dart';
 import 'package:flutter_app/presentation/pages/detail_page/upperSection.dart';
 import 'package:slimy_card/slimy_card.dart';

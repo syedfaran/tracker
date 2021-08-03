@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/helper/app_String.dart';
-import 'package:flutter_app/helper/screenUtil.dart';
-import 'package:flutter_app/helper/toastNotfier.dart';
+import 'package:flutter_app/DataProvider/form_provider/signIn_validation_Provider.dart';
+import 'package:flutter_app/DataProvider/form_provider/wrapper_Provider.dart';
 import 'package:flutter_app/DataProvider/firebaseAuth_provider.dart';
-import 'package:flutter_app/presentation/businessLogic/loginORregisterbloc.dart';
-import 'package:flutter_app/presentation/businessLogic/signIn_validation.dart';
-import 'package:flutter_app/presentation/customWidget/custom_elevatedButton.dart';
-import 'package:flutter_app/presentation/customWidget/custom_iconTextButton.dart';
-import 'package:flutter_app/presentation/customWidget/custom_loader.dart';
-import 'package:flutter_app/presentation/customWidget/textField_container.dart';
+import 'package:flutter_app/presentation/app_util/app_String.dart';
+import 'package:flutter_app/presentation/app_util/screenUtil.dart';
+import 'package:flutter_app/presentation/app_util/toastNotfier.dart';
+import 'package:flutter_app/presentation/widgets/custom_elevatedButton.dart';
+import 'package:flutter_app/presentation/widgets/custom_iconTextButton.dart';
+import 'package:flutter_app/presentation/widgets/custom_loader.dart';
+import 'package:flutter_app/presentation/widgets/textField_container.dart';
 import 'package:provider/provider.dart';
 
 class LoginState extends StatelessWidget {

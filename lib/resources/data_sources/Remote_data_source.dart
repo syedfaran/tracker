@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_app/data/model/job_list_model.dart';
-import 'package:flutter_app/helper/app_String.dart';
-import 'package:flutter_app/data/repository/firebaseAuth_Repo.dart';
+import 'package:flutter_app/model/job_list_model.dart';
+import 'package:flutter_app/presentation/app_util/app_String.dart';
+import 'package:flutter_app/resources/repository/firebaseAuth_Repo.dart';
 import 'package:http/http.dart' as http;
 //abstract todo
+abstract class AbstractRemoteDataSource {
+  Future getListOfJobs();
+}
 
-class RemoteDataSource{
+class RemoteDataSource implements AbstractRemoteDataSource{
   static const jobListApi = AppApiString.listOfJobs;
    Future<List<JobListModel>>getListOfJobs()async{
     try{

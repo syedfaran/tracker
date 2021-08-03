@@ -1,17 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_app/DataProvider/form_provider/wrapper_Provider.dart';
 import 'package:flutter_app/DataProvider/joblist_Provider.dart';
-
-import 'package:flutter_app/data/model/job_list_model.dart';
-import 'package:flutter_app/data/model/user_model.dart';
-import 'package:flutter_app/helper/app_String.dart';
-import 'package:flutter_app/helper/screenUtil.dart';
 import 'package:flutter_app/DataProvider/fireStore_provider.dart';
 import 'package:flutter_app/DataProvider/firebaseAuth_provider.dart';
-import 'package:flutter_app/presentation/businessLogic/loginORregisterbloc.dart';
-import 'package:flutter_app/presentation/customWidget/custom_elevatedButton.dart';
-import 'package:flutter_app/presentation/customWidget/custom_loader.dart';
-
+import 'package:flutter_app/model/job_list_model.dart';
+import 'package:flutter_app/model/user_model.dart';
+import 'package:flutter_app/presentation/app_util/app_String.dart';
+import 'package:flutter_app/presentation/app_util/screenUtil.dart';
+import 'package:flutter_app/presentation/widgets/custom_elevatedButton.dart';
+import 'package:flutter_app/presentation/widgets/custom_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app/route_generator.dart';
 
@@ -25,6 +24,13 @@ class HomePage extends StatelessWidget {
       create: (context)=> DatabaseService(uid: context.read<User>().uid).userData,
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(onPressed: (){
+              context.read<AuthProvider>().signOutUser().then((value) {
+                context.read<LoginRegisterProvider>().eventToState(LoginEvent.login);
+              });
+            }, icon: Icon(Icons.logout,color: Theme.of(context).iconTheme.color,)),
+          ],
           title: UserName(),
           leading: IconButton(
             icon: Icon(
@@ -32,11 +38,9 @@ class HomePage extends StatelessWidget {
               color: Theme.of(context).iconTheme.color,
             ),
             onPressed: () {
-              context.read<AuthProvider>().signOutUser().then((value) {
-                context.read<LoginRegisterProvider>().eventToState(LoginEvent.login);
-              });
-              //this will do  exit app as we are not using navigation
-             // SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+
+             // this will do  exit app as we are not using navigation
+             SystemChannels.platform.invokeMethod('SystemNavigator.pop');
             },
           ),
           backgroundColor: Colors.transparent,

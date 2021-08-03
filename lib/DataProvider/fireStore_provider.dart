@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_app/data/model/user_model.dart';
+import 'package:flutter_app/model/user_model.dart';
 
 
 abstract class DatabaseRepo<T> {
