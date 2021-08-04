@@ -19,7 +19,6 @@ class RouteGenerator {
     else {
       arguments = ScreenArguments();
     }
-    print(arguments.data.toString());
     switch (settings.name) {
       case AppRouteString.initialPage:
         return MaterialPageRoute(

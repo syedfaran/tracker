@@ -59,7 +59,7 @@ class _SlimyWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: SlimyCard(
-            footerColor: Colors.lime,
+            footerColor: Color(0xffD8E3E7).withOpacity(0.5),
             color: Theme.of(context).primaryColorLight,
             width: AppConfig.of(context).appWidth(85),
             topCardHeight: AppConfig.of(context).appWidth(46),
@@ -67,7 +67,7 @@ class _SlimyWidget extends StatelessWidget {
             borderRadius: 15,
             topCardWidget: UpperContent(job: job, cate: mainJob),
             bottomCardWidget: LowerContent(job: job),
-            slimeEnabled: true,
+            slimeEnabled: false,
           ),
         );
       }).toList(),
