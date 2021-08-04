@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/JobListModel.dart';
 import 'package:flutter_app/ui/appUtil/ScreenUtil.dart';
-import 'package:flutter_app/ui/pages/detail_page/UpperSection.dart';
+import 'package:flutter_app/ui/pages/detailPage/UpperSection.dart';
+
 import 'package:slimy_card/slimy_card.dart';
 
 import 'LowerSection.dart';

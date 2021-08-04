@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/JobListModel.dart';
 import 'package:flutter_app/ui/appUtil/AppString.dart';
-import 'package:flutter_app/ui/pages/detail_page/DetailPage.dart';
+import 'package:flutter_app/ui/pages/detailPage/DetailPage.dart';
+
 import 'package:flutter_app/ui/pages/googlemapPage/GoogleMapPage.dart';
 import 'package:flutter_app/ui/pages/HomePage.dart';
 import 'package:flutter_app/ui/pages/Wrapper.dart';

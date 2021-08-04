@@ -1,5 +1,5 @@
-import 'package:flutter_app/DataProvider/DatabaseProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_app/provider/DatabaseProvider.dart';
 
 
 class Failure{

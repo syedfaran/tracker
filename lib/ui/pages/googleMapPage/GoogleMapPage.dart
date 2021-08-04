@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/FirebaseAuthProvider.dart';
+import 'package:flutter_app/provider/FirebaseAuthProvider.dart';
 import 'package:flutter_app/ui/appUtil/ScreenUtil.dart';
 import 'package:flutter_app/ui/pages/googlemapPage/GoogleMapProvider.dart';
 import 'package:flutter_app/ui/widgets/CustomLoader.dart';

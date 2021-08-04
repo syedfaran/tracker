@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/FirebaseAuthProvider.dart';
+
 import 'package:flutter_app/model/JobListModel.dart';
+import 'package:flutter_app/provider/FirebaseAuthProvider.dart';
 import 'package:flutter_app/resources/repository/Repo.dart';
 import 'package:flutter_app/resources/repository/FirebaseAuthRepo.dart';
 

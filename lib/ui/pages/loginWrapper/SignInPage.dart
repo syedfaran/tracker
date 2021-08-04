@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/FirebaseAuthProvider.dart';
-import 'package:flutter_app/DataProvider/formProvider/SignInValidationProvider.dart';
-import 'package:flutter_app/DataProvider/formProvider/WrapperProvider.dart';
+import 'package:flutter_app/provider/FirebaseAuthProvider.dart';
+import 'package:flutter_app/provider/formProvider/SignInValidationProvider.dart';
+import 'package:flutter_app/provider/formProvider/WrapperProvider.dart';
 import 'package:flutter_app/ui/appUtil/AppString.dart';
 import 'package:flutter_app/ui/appUtil/ScreenUtil.dart';
 import 'package:flutter_app/ui/appUtil/ToastNotfier.dart';

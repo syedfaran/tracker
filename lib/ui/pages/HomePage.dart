@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/DataProvider/formProvider/WrapperProvider.dart';
-import 'package:flutter_app/DataProvider/JobListProvider.dart';
-import 'package:flutter_app/DataProvider/DatabaseProvider.dart';
-import 'package:flutter_app/DataProvider/FirebaseAuthProvider.dart';
 import 'package:flutter_app/model/JobListModel.dart';
 import 'package:flutter_app/model/User.dart';
+import 'package:flutter_app/provider/DatabaseProvider.dart';
+import 'package:flutter_app/provider/FirebaseAuthProvider.dart';
+import 'package:flutter_app/provider/JobListProvider.dart';
+import 'package:flutter_app/provider/formProvider/WrapperProvider.dart';
 import 'package:flutter_app/ui/appUtil/AppString.dart';
 import 'package:flutter_app/ui/appUtil/ScreenUtil.dart';
 import 'package:flutter_app/ui/widgets/CustomElevatedButton.dart';

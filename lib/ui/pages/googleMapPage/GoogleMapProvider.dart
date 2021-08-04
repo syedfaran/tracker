@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter_app/model/JobListModel.dart';
+import 'package:flutter_app/provider/FirebaseAuthProvider.dart';
+import 'package:flutter_app/provider/JobListProvider.dart';
 import 'package:flutter_app/ui/appUtil/ToastNotfier.dart';
 import 'package:flutter_app/ui/pages/googlemapPage/Markergenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/DataProvider/JobListProvider.dart';
-import 'package:flutter_app/DataProvider/FirebaseAuthProvider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'MapMarker.dart';
