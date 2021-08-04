@@ -1,4 +1,4 @@
-import 'package:flutter_app/DataProvider/databaseProvider.dart';
+import 'package:flutter_app/DataProvider/DatabaseProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 

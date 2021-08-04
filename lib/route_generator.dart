@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/jobListModel.dart';
-import 'package:flutter_app/ui/appUtil/appString.dart';
-import 'package:flutter_app/ui/pages/detail_page/detailPage.dart';
-import 'package:flutter_app/ui/pages/googlemapPage/googleMapPage.dart';
-import 'package:flutter_app/ui/pages/homePage.dart';
-import 'package:flutter_app/ui/pages/wrapper.dart';
+import 'package:flutter_app/model/JobListModel.dart';
+import 'package:flutter_app/ui/appUtil/AppString.dart';
+import 'package:flutter_app/ui/pages/detail_page/DetailPage.dart';
+import 'package:flutter_app/ui/pages/googlemapPage/GoogleMapPage.dart';
+import 'package:flutter_app/ui/pages/HomePage.dart';
+import 'package:flutter_app/ui/pages/Wrapper.dart';
 
 
 class RouteObservers {

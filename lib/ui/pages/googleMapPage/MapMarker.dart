@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/ui/appUtil/screenUtil.dart';
+import 'package:flutter_app/ui/appUtil/ScreenUtil.dart';
 
 
 
