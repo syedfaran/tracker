@@ -10,7 +10,6 @@ import 'package:flutter_app/provider/JobListProvider.dart';
 import 'package:flutter_app/provider/formProvider/SignInValidationProvider.dart';
 import 'package:flutter_app/provider/formProvider/SignUpValidationProvider.dart';
 import 'package:flutter_app/provider/formProvider/WrapperProvider.dart';
-
 import 'package:provider/provider.dart';
 
 
@@ -18,6 +17,10 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await Firebase.initializeApp();
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   runApp(MultiProvider(providers: [

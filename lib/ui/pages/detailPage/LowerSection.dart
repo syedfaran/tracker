@@ -12,9 +12,8 @@ class LowerContent extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
       width: double.maxFinite,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Wrap(
+        direction: Axis.vertical,
         children: [
           const SizedBox(height: 25),
           JobDescriptionTextWidget(
