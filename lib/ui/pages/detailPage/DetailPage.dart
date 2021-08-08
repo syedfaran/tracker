@@ -60,7 +60,7 @@ class _SlimyWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: SlimyCard(
-            footerColor: Color(0xffD8E3E7).withOpacity(0.5),
+            childColor: Color(0xffD8E3E7).withOpacity(0.5),
             color: Theme.of(context).primaryColorLight,
             width: AppConfig.of(context).appWidth(85),
             topCardHeight: AppConfig.of(context).appWidth(46),
